@@ -24,6 +24,10 @@
 
                 <flux:navlist.item icon="" :href="route('pigfeeds')" :current="request()->routeIs('pigfeeds')"
                     wire:navigate>{{ __('🐖   Feeds') }}</flux:navlist.item>
+
+                <flux:navlist.item icon="" :href="route('pigs.trash')"
+                    :current="request()->routeIs('pigs.trash')" wire:navigate>{{ __('🗑️   Trash') }}
+                </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>
 

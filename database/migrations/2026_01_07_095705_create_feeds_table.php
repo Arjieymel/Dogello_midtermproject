@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('feeds', function (Blueprint $table) {
-            $table->renameColumn('descriptiom', 'description');
-            //
+        Schema::create('feeds', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -22,9 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('feeds', function (Blueprint $table) {
-            $table->renameColumn('description', 'descriptiom');
-            //
-        });
+        Schema::dropIfExists('feeds');
     }
 };

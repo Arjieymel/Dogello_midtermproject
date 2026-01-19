@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pigs', function (Blueprint $table) {
-            $table->string('purpose')->nullable()->after('type');
+            $table->softDeletes();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pigs', function (Blueprint $table) {
-            $table->dropColumn('purpose'); // <- This removes the column if rolled back
+            $table->dropSoftDeletes();
         });
     }
 };

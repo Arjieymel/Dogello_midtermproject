@@ -14,12 +14,16 @@ Route::get('/dashboard', [PigController::class, 'index'])
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
+    // MUST be before resource
+    Route::get('/pigs/trash', [PigController::class, 'trash'])->name('pigs.trash');
+    Route::post('/pigs/{id}/restore', [PigController::class, 'restore'])->name('pigs.restore');
+    Route::delete('/pigs/{id}/force-delete', [PigController::class, 'forceDelete'])->name('pigs.force-delete');
+
     Route::resource('pigs', PigController::class);
-    Route::get('/pigs/create', [PigController::class, 'create'])->name('pigs.create');
-    Route::post('/pigs/store', [PigController::class, 'store'])->name('pigs.store');
-    Route::get('/pigs/{pig}/edit', [PigController::class, 'edit'])->name('pigs.edit');
-    Route::delete('/pigs/{pig}', [PigController::class, 'destroy'])->name('pigs.destroy');
 });
+
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('feeds', FeedController::class);
@@ -57,3 +61,6 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 });
+
+Route::get('/pigs/export/pdf', [PigController::class, 'exportPdf'])
+    ->name('pigs.export.pdf');

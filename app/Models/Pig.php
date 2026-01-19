@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pig extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'weight',
         'status',
@@ -13,11 +16,11 @@ class Pig extends Model
         'purpose',
         'feed_id',
         'price',
+        'photo',
     ];
 
     public function feed()
     {
         return $this->belongsTo(Feed::class);
     }
-    //
 }

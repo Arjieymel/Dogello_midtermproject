@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Laravel\Prompts\table;
+
 return new class extends Migration
 {
     /**
@@ -12,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pigs', function (Blueprint $table) {
-            $table->string('purpose')->nullable()->after('type');
+            $table->string('photo')->nullable()->after('price');
             //
         });
     }
@@ -23,7 +25,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('pigs', function (Blueprint $table) {
-            $table->string('purpose')->nullable()->after('type');
             //
         });
     }

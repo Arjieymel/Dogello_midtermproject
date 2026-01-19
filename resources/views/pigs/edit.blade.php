@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        <form action="{{ route('pigs.update', $pig->id) }}" method="POST" class="space-y-8">
+        <form action="{{ route('pigs.update', $pig->id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
             @csrf
             @method('PUT')
 
@@ -104,6 +104,34 @@
                         class="mt-1 w-full rounded-xl border border-blue-300 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-100">
                 </div>
 
+            </div>
+
+            {{-- Photo Section --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{-- Current Photo --}}
+                <div>
+                    <label class="block text-sm font-semibold dark:text-blue-300">Current Photo</label>
+                    <div class="mt-1 flex items-center">
+                        @if ($pig->photo)
+                            <img src="{{ asset('storage/' . $pig->photo) }}"
+                                class="h-20 w-20 rounded-full object-cover border">
+                        @else
+                            <div
+                                class="flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-white text-lg font-semibold">
+                                {{ strtoupper(substr($pig->type, 0, 2)) }}
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Upload New Photo --}}
+                <div>
+                    <label class="block text-sm font-semibold dark:text-blue-300">Upload New Photo (Optional)</label>
+                    <input type="file" name="photo" accept="image/png,image/jpeg"
+                        class="mt-1 w-full rounded-xl border border-blue-300 bg-white px-4 py-3 text-sm shadow-sm focus:border-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-100">
+                    <p class="mt-1 text-xs text-neutral-500 dark:text-neutral-400">Leave empty to keep current photo.
+                        Max 2MB, PNG or JPEG only.</p>
+                </div>
             </div>
 
             {{-- Buttons --}}
